@@ -1,0 +1,24 @@
+{
+  "name": "koa_login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_PATH=src nodemon --watch src/ src/index.js",
+    "build": "cross-env NODE_PATH=src node src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "dotenv": "^6.1.0",
+    "joi": "^14.0.1",
+    "jsonwebtoken": "^8.3.0",
+    "koa": "^2.6.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.3.5"
+  }
+}
