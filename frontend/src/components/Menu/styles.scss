@@ -1,0 +1,119 @@
+@import "../../shared/_color.scss";
+@import "../../shared/_mediaQuery.scss";
+
+.menu {
+  width: 300px;
+  height: 100%;
+  position: fixed;
+  background-color: white;
+  padding: 50px;
+  padding-bottom: 30px;
+  overflow-y: auto;
+  @include desktop {
+    display: none;
+  }
+  @include tablet {
+    display: none;
+  }
+  @include mobile {
+    display: none;
+  }
+  .menu__logo {
+    text-align: center;
+    img {
+      width: 120px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  }
+  .menu__items {
+    margin-top: 50px;
+    text-align: right;
+    .menu__item {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 18px;
+      margin-top: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid $bd-color;
+      cursor: pointer;
+      svg {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+        fill: #212529;
+      }
+    }
+  }
+}
+
+.menu-drawer {
+  width: 300px;
+  padding: 0 50px;
+  margin-left: -300px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  overflow-y: auto;
+  z-index: 300;
+  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  transition: margin-left 0.5s;
+  @include desktop-lg {
+    display: none;
+  }
+  .menu-drawer__close {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    svg {
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      position: absolute;
+      right: -15px;
+      fill: $soft-black;
+    }
+  }
+  .menu__items {
+    text-align: right;
+    .menu__item {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 18px;
+      margin-top: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid $bd-color;
+      cursor: pointer;
+      svg {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+        fill: #212529;
+      }
+    }
+  }
+}
+
+.menu-drawer--open {
+  margin-left: 0;
+  transition: margin-left 0.5s;
+}
+
+.menu-drawer__dim {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 200;
+}
+
+.menu-drawer__dim--open {
+  display: block;
+}

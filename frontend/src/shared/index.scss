@@ -1,0 +1,20 @@
+@import "./_color.scss";
+
+@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic");
+@import url("https://fonts.googleapis.com/css?family=Nanum+Myeongjo");
+
+* {
+  box-sizing: border-box;
+  font-family: "Nanum Gothic", sans-serif !important;
+  letter-spacing: 0.5px;
+  color: $soft-black;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background-color: $bg-color;
+}
