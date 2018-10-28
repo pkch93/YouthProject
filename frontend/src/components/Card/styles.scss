@@ -1,0 +1,66 @@
+@import "../../shared/_color.scss";
+@import "../../shared/_mediaQuery.scss";
+
+.card {
+  position: relative;
+  background-color: white;
+  width: 31%;
+  height: 350px;
+  margin-bottom: 30px;
+  padding: 30px;
+  margin-right: 3.5%;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px -10px rgba(0, 0, 0, 0.25);
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+  @include tablet {
+    width: 48%;
+    margin-right: 4%;
+    &:nth-child(3n) {
+      margin-right: 4%;
+    }
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+  @include mobile {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  .card__top {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    .card__type {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .card__title {
+      font-size: 25px;
+    }
+    .card__slogan {
+      display: block;
+      font-size: 15px;
+      margin-top: 10px;
+    }
+    .card__org {
+      display: block;
+      font-size: 15px;
+      margin-top: 10px;
+    }
+  }
+  .card__mid {
+    font-size: 15px;
+    span {
+      display: block;
+    }
+  }
+  .card__bot {
+    margin-top: 10px;
+    .card__detail {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@import "../../shared/_color.scss";
+@import "../../shared/_mediaQuery.scss";
+
+.card-detail {
+  width: 600px;
+  height: 600px;
+  background-color: white;
+  border-radius: 10px;
+  @include mobile {
+    width: 90%;
+    margin: 0 auto;
+  }
+}

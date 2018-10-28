@@ -1,0 +1,85 @@
+@import "../../shared/_color.scss";
+@import "../../shared/_mediaQuery.scss";
+
+.filter__wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  .filter__title {
+    font-size: 18px;
+    margin-right: 10px;
+    @include desktop {
+      font-size: 16px;
+    }
+    @include tablet {
+      font-size: 16px;
+    }
+    @include mobile {
+      font-size: 16px;
+    }
+  }
+  .filter__items {
+    display: flex;
+    flex-wrap: wrap;
+    .filter__item {
+      // background-color: white;
+      margin-right: 20px;
+      padding: 8px;
+      border: 1px solid $soft-black;
+      color: $soft-black;
+      cursor: pointer;
+      border-radius: 10px;
+      &:hover {
+        background-color: $soft-black;
+        color: white;
+      }
+      @include desktop {
+        font-size: 14px;
+      }
+      @include tablet {
+        font-size: 14px;
+      }
+      @include mobile {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.filter__search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 30px;
+  input {
+    background-color: transparent;
+    height: 40px;
+    width: 250px;
+    padding-left: 15px;
+    padding-right: 40px;
+    border: 1px solid $soft-black;
+    font-size: 15px;
+    border-radius: 10px;
+    &:focus {
+      outline: none;
+    }
+    @include desktop {
+      font-size: 14px;
+      height: 35px;
+    }
+    @include tablet {
+      font-size: 14px;
+      height: 35px;
+    }
+    @include mobile {
+      font-size: 14px;
+      height: 35px;
+    }
+  }
+  svg {
+    width: 20px;
+    position: absolute;
+    left: 220px;
+  }
+}

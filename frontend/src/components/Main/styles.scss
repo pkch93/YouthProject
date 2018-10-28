@@ -1,0 +1,87 @@
+@import "../../shared/_color.scss";
+@import "../../shared/_mediaQuery.scss";
+
+.main {
+  min-height: 1000px;
+  max-width: 1080px;
+  margin-left: 300px;
+  padding: 50px;
+  @include desktop {
+    margin: 0 auto;
+    margin-top: 100px;
+    padding-top: 0;
+  }
+  @include tablet {
+    margin: 0 auto;
+    margin-top: 100px;
+    padding-top: 0;
+  }
+  @include mobile {
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 0 20px;
+  }
+  .main__title {
+    font-size: 30px;
+    @include desktop {
+      font-size: 25px;
+      margin-top: 30px;
+    }
+    @include tablet {
+      font-size: 25px;
+      margin-top: 30px;
+    }
+    @include mobile {
+      font-size: 25px;
+      margin-top: 30px;
+    }
+  }
+  .main__divider {
+    width: 100%;
+    border-bottom: 1px dashed $dv-color;
+  }
+}
+
+.main__menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  @include desktop-lg {
+    display: none;
+  }
+  .main__menu-wrapper {
+    max-width: 1080px;
+    height: 70px;
+    padding: 20px 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    @include mobile {
+      margin: 0 auto;
+      padding: 20px 20px;
+    }
+    svg {
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      position: absolute;
+      left: 50px;
+      @include mobile {
+        left: 20px;
+      }
+    }
+    span {
+      font-size: 30px;
+      font-family: "Nanum Myeongjo", serif !important;
+      font-weight: bold;
+      letter-spacing: 5px;
+      cursor: pointer;
+      color: $soft-black;
+    }
+  }
+}

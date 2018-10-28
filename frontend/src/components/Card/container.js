@@ -3,18 +3,18 @@ import App from "./presenter";
 
 export default class container extends Component {
   state = {
-    isMenuOpen: false
+    isModalOpen: false
   };
 
-  menuOpen = () => {
+  modalOpen = () => {
     this.setState({
-      isMenuOpen: true
+      isModalOpen: true
     });
   };
 
-  menuClose = () => {
+  modalClose = () => {
     this.setState({
-      isMenuOpen: false
+      isModalOpen: false
     });
   };
 
@@ -23,8 +23,8 @@ export default class container extends Component {
       <App
         {...this.state}
         {...this.props}
-        menuOpen={this.menuOpen}
-        menuClose={this.menuClose}
+        modalOpen={this.modalOpen}
+        modalClose={this.modalClose}
       />
     );
   }
