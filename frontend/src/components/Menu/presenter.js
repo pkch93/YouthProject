@@ -14,9 +14,9 @@ export default class presenter extends Component {
             <img src={require("../../images/logo.png")} alt="logo" />
           </h1>
           <ul className="menu__items">
-            <li className="menu__item">
+            <li className="menu__item menu__item--active">
               취업진로상담
-              <Ionicon icon="ios-chatbubbles-outline" />
+              <Ionicon icon="ios-chatbubbles" />
             </li>
             <li className="menu__item">
               교육·훈련
@@ -54,9 +54,9 @@ export default class presenter extends Component {
             <Ionicon icon="ios-close" onClick={menuClose} />
           </div>
           <ul className="menu__items">
-            <li className="menu__item">
+            <li className="menu__item menu__item--active">
               취업진로상담
-              <Ionicon icon="ios-chatbubbles-outline" />
+              <Ionicon icon="ios-chatbubbles" />
             </li>
             <li className="menu__item">
               교육·훈련

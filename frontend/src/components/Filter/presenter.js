@@ -8,10 +8,10 @@ export default class presenter extends Component {
     return (
       <>
         <div className="filter__wrapper">
-          <span className="filter__title">필터 :</span>
           <ul className="filter__items">
+            <li className="filter__item filter__item--active">#전체</li>
+            <li className="filter__item">#인기순</li>
             <li className="filter__item">#온라인 신청</li>
-            <li className="filter__item">#지자체</li>
           </ul>
         </div>
         <div className="filter__search">
@@ -20,7 +20,7 @@ export default class presenter extends Component {
             name=""
             placeholder="검색할 사업명을 입력하세요."
           />
-          <Ionicon icon="ios-search-outline" />
+          <Ionicon icon="ios-search" />
         </div>
       </>
     );
