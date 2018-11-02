@@ -8,16 +8,11 @@ import Filter from "../Filter";
 import "./styles.scss";
 
 export default class presenter extends Component {
-
-   componentDidMount(){
-    fetch("http://localhost:4000/api/data")
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(e => console.log(e));
-  }
-
   render() {
     const {
+      data,
+      isLoaded,
+
       match,
       isMenuOpen,
       menuOpen,
@@ -44,7 +39,15 @@ export default class presenter extends Component {
           </h1>
           <Filter />
           <div className="main__divider" />
-          <CardList />
+          {isLoaded ? (
+            <CardList data={data} match={match} />
+          ) : (
+            <img
+              className="main__loading"
+              src={require("../../images/loading.svg")}
+              alt="loading"
+            />
+          )}
         </section>
       </>
     );

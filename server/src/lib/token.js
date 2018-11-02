@@ -32,8 +32,8 @@ exports.jwtMiddleware = async (ctx, next) => {
         const decoded = await decodeToken(token);
 
         if(Date.now() / 1000 - decoded.iat > 60 * 60 * 24){
-            const { _id, profile } = decoded;
-            const freshToken = await generateToken({_id, profile});
+            const { _id, username } = decoded;
+            const freshToken = await generateToken({_id, username});
             ctx.cookies.set("access_token", freshToken, {
                 httpOnly: true,
                 maxAge: 1000 * 60 * 60 * 24 * 7

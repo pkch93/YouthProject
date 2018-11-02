@@ -2,6 +2,24 @@ import React, { Component } from "react";
 import App from "./presenter";
 
 export default class container extends Component {
+  state = {
+    data: {},
+    isLoaded: false
+  };
+
+  // 데이터를 모두 불러온다.
+  componentDidMount() {
+    fetch("http://localhost:4000/api/data/")
+      .then(res => res.json())
+      .then(data =>
+        this.setState({
+          data: Object.assign(data),
+          isLoaded: true
+        })
+      )
+      .catch(e => console.log(e));
+  }
+
   switchCategory = category => {
     switch (category) {
       case "policy":
@@ -18,6 +36,12 @@ export default class container extends Component {
   };
 
   render() {
-    return <App {...this.props} switchCategory={this.switchCategory} />;
+    return (
+      <App
+        {...this.state}
+        {...this.props}
+        switchCategory={this.switchCategory}
+      />
+    );
   }
 }

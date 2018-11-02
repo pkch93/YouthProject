@@ -17,11 +17,18 @@ const Policy = new Schema({
     relInfoUrl: String,
     chargerClcd: String,
     reviews: [Review],
-    likes: {type: Number, default: 0}
+    likes: {type: Number, default: 0},
+    type: {type: String, default: "policy"}
 });
 
 Policy.statics.getPolicy = function(id) {
     return this.find({"busiId": id});
+};
+
+Policy.methods.likeUp = function(id, category){
+    if(category === "policy"){
+        this.update({"_id": id}, {"$inc": {likes: 1}});
+    }
 };
 
 module.exports = Policy;

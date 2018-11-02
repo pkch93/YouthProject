@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 const crypto = require("crypto");
 const { generateToken } = require("lib/token");
-const Policy = require("./data/policy");
-const Events = require("./data/event");
-const Intern = require("./data/intern");
-const Govern = require("./data/govern");
+const PolicySchema = require("./data/policy");
+const EventsSchema = require("./data/event");
+const InternSchema = require("./data/intern");
+const GovernSchema = require("./data/govern");
 const Review = require("./review")
 
 function hash(password){
@@ -17,7 +17,7 @@ const Account = new Schema({
     email: String,
     password: String,
     createdAt: {type: Date, default: Date.now},
-    store: [Policy | Events | Intern | Govern],
+    store: [PolicySchema | EventsSchema | InternSchema | GovernSchema],
     reviews: [Review] 
 });
 
@@ -57,11 +57,12 @@ Account.methods.generateToken = function(){
     return generateToken(payload);
 };
 
-Account.statics.reviewCreate = function({title, comment}){
-    this.reviews.push({
+Account.methods.reviewCreate = function({title, comment}){
+    const Review = mongoose.model("Review", ReviewSchema);
+    this.reviews.push(new Review({
         title,
         comment
-    });
+    }));
     this.save(err => {
         if(err) return console.log(err);
     });

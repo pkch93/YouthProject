@@ -14,7 +14,8 @@ const Intern = new Schema({
     applyDt: String,
     detailUrl: String,
     reviews: [Review],
-    likes: {type: Number, default: 0}
+    likes: {type: Number, default: 0},
+    type: {type: String, default: "intern"}
 });
 
 module.exports = Intern;

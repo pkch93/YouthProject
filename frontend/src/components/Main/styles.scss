@@ -41,6 +41,10 @@
     width: 100%;
     border-bottom: 1px dashed $dv-color;
   }
+  .main__loading {
+    display: block;
+    margin: 50px auto;
+  }
 }
 
 .main__menu {

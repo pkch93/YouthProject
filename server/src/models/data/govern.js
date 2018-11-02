@@ -17,7 +17,8 @@ const Govern = new Schema({
     rcritBeginDe: String,
     rcritEndDe: String,
     reviews: [Review],
-    likes: {type: Number, default: 0}
+    likes: {type: Number, default: 0},
+    type: {type: String, default: "govern"}
 });
 
 module.exports = Govern;

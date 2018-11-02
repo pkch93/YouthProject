@@ -17,17 +17,22 @@ const governURL = 'policyData/govern.json';
 const internURL = 'policyData/intern.json';
 
 exports.initGetPolicy = async () => {
-    const policies = getPolicies();
-    await Policy.insertMany(policies);
-    
-    const events = getEvents();
-    await Events.insertMany(events);
-
-    const interns = getInterns();
-    await Intern.insertMany(interns);
-    
-    const governs = getGoverns();
-    await Govern.insertMany(governs);
+    if(Policy.count() > 0){
+        const policies = getPolicies();
+        await Policy.insertMany(policies);
+    }
+    if(Events.count() > 0) {
+        const events = getEvents();
+        await Events.insertMany(events);
+    }
+    if(Intern.count() > 0){
+        const interns = getInterns();
+        await Intern.insertMany(interns);
+    }
+    if(Govern.count() > 0){
+        const governs = getGoverns();
+        await Govern.insertMany(governs);
+    }
 };
 
 const getPolicies = () => {

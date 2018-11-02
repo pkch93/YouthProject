@@ -1,5 +1,6 @@
 const Joi = require("joi"); // request 변수들을 검증하기 위한 api
 const Account = require("models/account"); // Account Collection
+const Review = require("models/review");
 
 exports.localRegister = async ctx => {
     const schema = Joi.object().keys({
@@ -45,7 +46,7 @@ exports.localRegister = async ctx => {
     }
 
     ctx.cookies.set("access_token", token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 *7 });
-    ctx.body = account.profile;
+    ctx.body = account.username;
 };
 
 exports.localLogin = async ctx => {
@@ -85,7 +86,7 @@ exports.localLogin = async ctx => {
     }
 
     ctx.cookies.set("access_token", token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 *7 });
-    ctx.body = account.profile;
+    ctx.body = account.username;
 };
 
 exports.exists = async ctx => {
@@ -122,6 +123,8 @@ exports.check = ctx => {
     ctx.body = user.profile;
 };
 
-exports.writeReview = ctx => {
+exports.writeReview = async ctx => {
+    const account = await Account.findOne({_id: ctx.request.user._id});
     const {title, content} = ctx.request.body;
+    account.reviewCreate(title, content);
 };
