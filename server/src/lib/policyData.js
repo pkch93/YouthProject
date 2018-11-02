@@ -10,51 +10,45 @@ const Intern = mongoose.model("Intern", InternSchema);
 const GovernSchema = require("models/data/govern");
 const Govern = mongoose.model("Govern", GovernSchema);
 
-
-const policyURL = 'policyData/policy.json';
-const eventURL = 'policyData/empEvent.json';
-const governURL = 'policyData/govern.json';
-const internURL = 'policyData/intern.json';
+const policyURL = "policyData/policy.json";
+const eventURL = "policyData/empEvent.json";
+const governURL = "policyData/govern.json";
+const internURL = "policyData/intern.json";
 
 exports.initGetPolicy = async () => {
-    if(Policy.count() > 0){
-        const policies = getPolicies();
-        await Policy.insertMany(policies);
-    }
-    if(Events.count() > 0) {
-        const events = getEvents();
-        await Events.insertMany(events);
-    }
-    if(Intern.count() > 0){
-        const interns = getInterns();
-        await Intern.insertMany(interns);
-    }
-    if(Govern.count() > 0){
-        const governs = getGoverns();
-        await Govern.insertMany(governs);
-    }
+  const policies = getPolicies();
+  await Policy.insertMany(policies);
+
+  const events = getEvents();
+  await Events.insertMany(events);
+
+  const interns = getInterns();
+  await Intern.insertMany(interns);
+
+  const governs = getGoverns();
+  await Govern.insertMany(governs);
 };
 
 const getPolicies = () => {
-    const json = fs.readFileSync(policyURL).toString();
-    const jsonObj = JSON.parse(json);
-    return jsonObj.jynEmpSptList;
+  const json = fs.readFileSync(policyURL).toString();
+  const jsonObj = JSON.parse(json);
+  return jsonObj.jynEmpSptList;
 };
 
 const getEvents = () => {
-    const json = fs.readFileSync(eventURL).toString();
-    const jsonObj = JSON.parse(json);
-    return jsonObj.empEvent;
+  const json = fs.readFileSync(eventURL).toString();
+  const jsonObj = JSON.parse(json);
+  return jsonObj.empEvent;
 };
 
 const getInterns = () => {
-    const json = fs.readFileSync(internURL).toString();
-    const jsonObj = JSON.parse(json);
-    return jsonObj.internWantedList;
+  const json = fs.readFileSync(internURL).toString();
+  const jsonObj = JSON.parse(json);
+  return jsonObj.internWantedList;
 };
 
 const getGoverns = () => {
-    const json = fs.readFileSync(governURL).toString();
-    const jsonObj = JSON.parse(json);
-    return jsonObj.ilmoaJob;
+  const json = fs.readFileSync(governURL).toString();
+  const jsonObj = JSON.parse(json);
+  return jsonObj.ilmoaJob;
 };
