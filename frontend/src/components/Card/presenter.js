@@ -110,7 +110,11 @@ export default class presenter extends Component {
 
     return (
       <>
-        <CardDetail isModalOpen={isModalOpen} modalClose={modalClose} />
+        <CardDetail
+          data={data}
+          isModalOpen={isModalOpen}
+          modalClose={modalClose}
+        />
         <div className="card">
           <div className="card__top">
             <span className="card__type">

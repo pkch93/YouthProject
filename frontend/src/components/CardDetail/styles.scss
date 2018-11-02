@@ -3,12 +3,29 @@
 
 .card-detail {
   width: 600px;
-  height: 600px;
+  min-height: 500px;
   background-color: white;
   border-radius: 10px;
   padding: 30px;
   @include mobile {
     width: 90%;
     margin: 0 auto;
+  }
+  .policy {
+    .policy__title {
+      line-height: 1.2em;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: justify;
+      word-break: break-all;
+    }
+    .policy__info {
+      line-height: 1.2em;
+      display: block;
+      margin-bottom: 10px;
+      text-align: justify;
+      word-break: break-all;
+    }
   }
 }
