@@ -5,7 +5,7 @@ import CardDetail from "../CardDetail";
 import "./styles.scss";
 
 export default class presenter extends Component {
-  switchCharge = category => {
+  switchCategory = category => {
     switch (category) {
       case "policy":
         return "청년취업정책";
@@ -20,8 +20,93 @@ export default class presenter extends Component {
     }
   };
 
+  switchOrg = category => {
+    const { data } = this.props;
+
+    switch (category) {
+      case "policy":
+        return data.chargerOrgNm;
+      case "intern":
+        return data.companyNm;
+      case "event":
+        return data.area;
+      case "govern":
+        return data.manageInsttNm;
+      default:
+        return "";
+    }
+  };
+
+  switchTitle = category => {
+    const { data } = this.props;
+
+    switch (category) {
+      case "policy":
+        return data.busiNm;
+      case "intern":
+        return data.collectJobsNm;
+      case "event":
+        return data.eventNm;
+      case "govern":
+        return data.bsnsNm;
+      default:
+        return "";
+    }
+  };
+
+  switchSlogan = category => {
+    const { data } = this.props;
+
+    switch (category) {
+      case "policy":
+        return data.dtlBusiNm;
+      case "intern":
+        return data.regionNm;
+      case "event":
+        return data.eventTerm;
+      case "govern":
+        return data.rcritPblancNm;
+      default:
+        return "";
+    }
+  };
+
+  switchAge = category => {
+    const { data } = this.props;
+
+    switch (category) {
+      case "policy":
+        return data.ageEtcCont;
+      case "intern":
+        return "무관";
+      case "event":
+        return "무관";
+      case "govern":
+        return "무관";
+      default:
+        return "";
+    }
+  };
+
+  switchSchool = category => {
+    const { data } = this.props;
+
+    switch (category) {
+      case "policy":
+        return data.edubgEtcCont;
+      case "intern":
+        return data.minEdubg + " 이상";
+      case "event":
+        return "무관";
+      case "govern":
+        return "무관";
+      default:
+        return "";
+    }
+  };
+
   render() {
-    const { data, match, isModalOpen, modalOpen, modalClose } = this.props;
+    const { data, isModalOpen, modalOpen, modalClose } = this.props;
 
     return (
       <>
@@ -29,19 +114,21 @@ export default class presenter extends Component {
         <div className="card">
           <div className="card__top">
             <span className="card__type">
-              {match.params.category} / {data.chargerOrgNm}
+              {this.switchCategory(data.type)} / {this.switchOrg(data.type)}
             </span>
             <h1
               className="card__title"
               onClick={isModalOpen ? modalClose : modalOpen}
             >
-              {data.busiNm}
+              {this.switchTitle(data.type)}
             </h1>
-            <span className="card__slogan">{data.dtlBusiNm}</span>
+            <span className="card__slogan">{this.switchSlogan(data.type)}</span>
           </div>
           <div className="card__mid">
-            <span className="card__age">연령: {data.ageEtcCont}</span>
-            <span className="card__school">학력: {data.edubgEtcCont}</span>
+            <span className="card__age">연령: {this.switchAge(data.type)}</span>
+            <span className="card__school">
+              학력: {this.switchSchool(data.type)}
+            </span>
           </div>
           <div className="card__bot">
             <div className="card__thumb">
