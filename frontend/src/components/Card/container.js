@@ -10,12 +10,14 @@ export default class container extends Component {
     this.setState({
       isModalOpen: true
     });
+    document.querySelector("body").style.overflow = "hidden";
   };
 
   modalClose = () => {
     this.setState({
       isModalOpen: false
     });
+    document.querySelector("body").style.overflow = "auto";
   };
 
   render() {

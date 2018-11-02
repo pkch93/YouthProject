@@ -1,47 +1,94 @@
 import React, { Component } from "react";
 import Ionicon from "react-ionicons";
+import { Link } from "react-router-dom";
 
 import "./styles.scss";
 
 export default class presenter extends Component {
   render() {
-    const { isMenuOpen, menuClose } = this.props;
+    const { match, isMenuOpen, menuClose } = this.props;
 
     return (
       <>
         <section className="menu">
           <h1 className="menu__logo">
-            <img src={require("../../images/logo.png")} alt="logo" />
+            <Link to="/">
+              <img src={require("../../images/logo.png")} alt="logo" />
+            </Link>
           </h1>
           <ul className="menu__items">
-            <li className="menu__item">
-              취업진로상담
-              <Ionicon icon="ios-chatbubbles-outline" />
-            </li>
-            <li className="menu__item">
-              교육·훈련
-              <Ionicon icon="ios-build-outline" />
-            </li>
-            <li className="menu__item">
-              체험·인턴
-              <Ionicon icon="ios-school-outline" />
-            </li>
-            <li className="menu__item">
-              해외진출
-              <Ionicon icon="ios-plane-outline" />
-            </li>
-            <li className="menu__item">
-              공공일자리
-              <Ionicon icon="ios-contacts-outline" />
-            </li>
-            <li className="menu__item">
-              지원금·보조금
-              <Ionicon icon="ios-card-outline" />
-            </li>
-            <li className="menu__item">
-              창업
-              <Ionicon icon="ios-bulb-outline" />
-            </li>
+            <Link to="/policy">
+              <li
+                className={
+                  match.params.category === "policy"
+                    ? "menu__item menu__item--active"
+                    : "menu__item"
+                }
+              >
+                청년취업정책
+                <Ionicon
+                  icon={
+                    match.params.category === "policy"
+                      ? "ios-checkbox"
+                      : "ios-checkbox-outline"
+                  }
+                />
+              </li>
+            </Link>
+            <Link to="/intern">
+              <li
+                className={
+                  match.params.category === "intern"
+                    ? "menu__item menu__item--active"
+                    : "menu__item"
+                }
+              >
+                청년인턴
+                <Ionicon
+                  icon={
+                    match.params.category === "intern"
+                      ? "ios-school"
+                      : "ios-school-outline"
+                  }
+                />
+              </li>
+            </Link>
+            <Link to="/event">
+              <li
+                className={
+                  match.params.category === "event"
+                    ? "menu__item menu__item--active"
+                    : "menu__item"
+                }
+              >
+                채용행사
+                <Ionicon
+                  icon={
+                    match.params.category === "event"
+                      ? "ios-chatbubbles"
+                      : "ios-chatbubbles-outline"
+                  }
+                />
+              </li>
+            </Link>
+            <Link to="/govern">
+              <li
+                className={
+                  match.params.category === "govern"
+                    ? "menu__item menu__item--active"
+                    : "menu__item"
+                }
+              >
+                정부지원일자리
+                <Ionicon
+                  icon={
+                    match.params.category === "govern"
+                      ? "ios-contacts"
+                      : "ios-contacts-outline"
+                  }
+                />
+              </li>
+            </Link>
           </ul>
         </section>
 
@@ -54,34 +101,78 @@ export default class presenter extends Component {
             <Ionicon icon="ios-close" onClick={menuClose} />
           </div>
           <ul className="menu__items">
-            <li className="menu__item">
-              취업진로상담
-              <Ionicon icon="ios-chatbubbles-outline" />
-            </li>
-            <li className="menu__item">
-              교육·훈련
-              <Ionicon icon="ios-build-outline" />
-            </li>
-            <li className="menu__item">
-              체험·인턴
-              <Ionicon icon="ios-school-outline" />
-            </li>
-            <li className="menu__item">
-              해외진출
-              <Ionicon icon="ios-plane-outline" />
-            </li>
-            <li className="menu__item">
-              공공일자리
-              <Ionicon icon="ios-contacts-outline" />
-            </li>
-            <li className="menu__item">
-              지원금·보조금
-              <Ionicon icon="ios-card-outline" />
-            </li>
-            <li className="menu__item">
-              창업
-              <Ionicon icon="ios-bulb-outline" />
-            </li>
+            <Link to="/policy" onClick={() => menuClose()}>
+              <li
+                className={
+                  match.params.category === "policy"
+                    ? "menu__item menu__item--active"
+                    : "menu__item"
+                }
+              >
+                청년취업정책
+                <Ionicon
+                  icon={
+                    match.params.category === "policy"
+                      ? "ios-checkbox"
+                      : "ios-checkbox-outline"
+                  }
+                />
+              </li>
+            </Link>
+            <Link to="/intern" onClick={() => menuClose()}>
+              <li
+                className={
+                  match.params.category === "intern"
+                    ? "menu__item menu__item--active"
+                    : "menu__item"
+                }
+              >
+                청년인턴
+                <Ionicon
+                  icon={
+                    match.params.category === "intern"
+                      ? "ios-school"
+                      : "ios-school-outline"
+                  }
+                />
+              </li>
+            </Link>
+            <Link to="/event" onClick={() => menuClose()}>
+              <li
+                className={
+                  match.params.category === "event"
+                    ? "menu__item menu__item--active"
+                    : "menu__item"
+                }
+              >
+                채용행사
+                <Ionicon
+                  icon={
+                    match.params.category === "event"
+                      ? "ios-chatbubbles"
+                      : "ios-chatbubbles-outline"
+                  }
+                />
+              </li>
+            </Link>
+            <Link to="/govern" onClick={() => menuClose()}>
+              <li
+                className={
+                  match.params.category === "govern"
+                    ? "menu__item menu__item--active"
+                    : "menu__item"
+                }
+              >
+                정부지원일자리
+                <Ionicon
+                  icon={
+                    match.params.category === "govern"
+                      ? "ios-contacts"
+                      : "ios-contacts-outline"
+                  }
+                />
+              </li>
+            </Link>
           </ul>
         </section>
 

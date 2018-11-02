@@ -10,12 +10,14 @@ export default class container extends Component {
     this.setState({
       isMenuOpen: true
     });
+    document.querySelector("body").style.overflow = "hidden";
   };
 
   menuClose = () => {
     this.setState({
       isMenuOpen: false
     });
+    document.querySelector("body").style.overflow = "auto";
   };
 
   render() {

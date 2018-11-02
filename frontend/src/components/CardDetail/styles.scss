@@ -6,6 +6,7 @@
   height: 600px;
   background-color: white;
   border-radius: 10px;
+  padding: 30px;
   @include mobile {
     width: 90%;
     margin: 0 auto;

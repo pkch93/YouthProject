@@ -5,26 +5,16 @@
   display: flex;
   align-items: center;
   margin-top: 30px;
-  margin-bottom: 20px;
-  .filter__title {
-    font-size: 18px;
-    margin-right: 10px;
-    @include desktop {
-      font-size: 16px;
-    }
-    @include tablet {
-      font-size: 16px;
-    }
-    @include mobile {
-      font-size: 16px;
-    }
-  }
+  margin-bottom: 10px;
+  user-select: none;
   .filter__items {
     display: flex;
     flex-wrap: wrap;
     .filter__item {
-      // background-color: white;
-      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-right: 15px;
       padding: 8px;
       border: 1px solid $soft-black;
       color: $soft-black;
@@ -34,14 +24,18 @@
         background-color: $soft-black;
         color: white;
       }
+      &.filter__item--active {
+        background-color: $soft-black;
+        color: white;
+      }
       @include desktop {
-        font-size: 14px;
+        font-size: 15px;
       }
       @include tablet {
-        font-size: 14px;
+        font-size: 15px;
       }
       @include mobile {
-        font-size: 14px;
+        font-size: 15px;
       }
     }
   }
@@ -65,19 +59,20 @@
       outline: none;
     }
     @include desktop {
-      font-size: 14px;
+      font-size: 15px;
       height: 35px;
     }
     @include tablet {
-      font-size: 14px;
+      font-size: 15px;
       height: 35px;
     }
     @include mobile {
-      font-size: 14px;
+      font-size: 15px;
       height: 35px;
     }
   }
   svg {
+    fill: $soft-black;
     width: 20px;
     position: absolute;
     left: 220px;
