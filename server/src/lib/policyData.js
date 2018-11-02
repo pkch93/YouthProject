@@ -18,6 +18,7 @@ const internURL = 'policyData/intern.json';
 
 exports.initGetPolicy = () => {
     const policies = getPolicies();
+    console.log(policies);
     Policy.insertMany(policies);
     
     const events = getEvents();

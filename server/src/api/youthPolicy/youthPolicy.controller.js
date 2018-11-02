@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const decycle = require("json-decycle").decycle;
 
 const PolicySchema = require("models/data/policy");
 const Policy = mongoose.model("Policy", PolicySchema);
@@ -13,22 +12,22 @@ const Govern = mongoose.model("Govern", GovernSchema);
 exports.getPolicies = async ctx => {
     const {category} = ctx.params;
     if(category === "policy"){
-        const policies = JSON.stringify(Policy.find(), decycle());
-        ctx.body = policies;
+        const polices = await Policy.find({});
+        ctx.body = polices;
     } else if (category === "event") {
-        const events = JSON.stringify(Events.find(), decycle());
+        const events = await Events.find();
         ctx.body = events;
-    } else if (category === "govern"){
-        const governs = JSON.stringify(Govern.find(), decycle());
+    } else if (category === "govern") {
+        const governs = await Govern.find();
         ctx.body = governs;
     } else if (category === "intern"){
-        const interns = JSON.stringify(Intern.find(), decycle());
+        const interns = await Intern.find();
         ctx.body = interns;
     } else {
-        const policies = JSON.stringify(Policy.find(), decycle());
-        const events = JSON.stringify(Events.find(), decycle());
-        const interns = JSON.stringify(Intern.find(), decycle());
-        const governs = JSON.stringify(Govern.find(), decycle());
+        const policies = await Policy.find();
+        const events = await Events.find();
+        const interns = await Intern.find();
+        const governs = await Govern.find();
         ctx.body = {policies, events, interns, governs};
     }
 };
