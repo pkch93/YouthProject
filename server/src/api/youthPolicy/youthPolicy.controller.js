@@ -30,4 +30,5 @@ exports.getPolicies = async ctx => {
         const governs = await Govern.find();
         ctx.body = {policies, events, interns, governs};
     }
+    ctx.res.writeHead(200, {'Access-Control-Allow-Origin': '*'});
 };

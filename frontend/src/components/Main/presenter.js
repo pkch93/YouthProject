@@ -8,6 +8,14 @@ import Filter from "../Filter";
 import "./styles.scss";
 
 export default class presenter extends Component {
+
+   componentDidMount(){
+    fetch("http://localhost:4000/api/data")
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(e => console.log(e));
+  }
+
   render() {
     const {
       match,

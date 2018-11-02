@@ -16,19 +16,18 @@ const eventURL = 'policyData/empEvent.json';
 const governURL = 'policyData/govern.json';
 const internURL = 'policyData/intern.json';
 
-exports.initGetPolicy = () => {
+exports.initGetPolicy = async () => {
     const policies = getPolicies();
-    console.log(policies);
-    Policy.insertMany(policies);
+    await Policy.insertMany(policies);
     
     const events = getEvents();
-    Events.insertMany(events);
+    await Events.insertMany(events);
 
     const interns = getInterns();
-    Intern.insertMany(interns);
+    await Intern.insertMany(interns);
     
     const governs = getGoverns();
-    Govern.insertMany(governs);
+    await Govern.insertMany(governs);
 };
 
 const getPolicies = () => {

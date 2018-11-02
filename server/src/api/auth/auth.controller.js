@@ -121,3 +121,7 @@ exports.check = ctx => {
     }
     ctx.body = user.profile;
 };
+
+exports.writeReview = ctx => {
+    const {title, content} = ctx.request.body;
+};
