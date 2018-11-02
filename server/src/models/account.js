@@ -2,34 +2,27 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 const crypto = require("crypto");
 const { generateToken } = require("lib/token");
+const Policy = require("./data/policy");
+const Events = require("./data/event");
+const Intern = require("./data/intern");
+const Govern = require("./data/govern");
+const Review = require("./review")
 
 function hash(password){
     return crypto.createHmac("sha256", process.env.SECRET_KEY).update(password).digest("hex");
 }
 
 const Account = new Schema({
-    profile: {
-        username: String,
-        thumnail: {type: String, default: "/static/images/default_thumbnail.png"}
-    },
+    username: String,
     email: String,
-    social: {
-        facebook: {
-            id: String,
-            accessToken: String
-        },
-        google: {
-            id: String,
-            accessToken: String
-        }
-    },
     password: String,
-    thoughtCount: {type: Number, default: 0},
-    createdAt: {type: Date, default: Date.now}
+    createdAt: {type: Date, default: Date.now},
+    store: [Policy | Events | Intern | Govern],
+    reviews: [Review] 
 });
 
 Account.statics.findByUsername = function(username){
-    return this.findOne({"profile.username": username}).exec();
+    return this.findOne({"username": username}).exec();
 };
 
 Account.statics.findByEmail = function(email){
@@ -38,15 +31,13 @@ Account.statics.findByEmail = function(email){
 
 Account.statics.findByEmailOrUsername = function({username, email}){
     return this.findOne({
-        $or: [ {"profile.username": username}, {email}]
+        $or: [ {"username": username}, {email}]
     }).exec();
 };
 
 Account.statics.localRegister = function({username, email, password}){
     const account = new this({
-        profile: {
-            username
-        },
+        username,
         email,
         password: hash(password)
     });
@@ -61,7 +52,7 @@ Account.methods.validatePassword = function(password){
 Account.methods.generateToken = function(){
     const payload = {
         _id: this._id,
-        profile: this.profile
+        username: this.username
     };
     return generateToken(payload);
 };

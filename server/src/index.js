@@ -4,12 +4,13 @@ const Koa = require("koa"); // Koa Application
 const Router = require("koa-router"); // Router 설정
 const mongoose = require("mongoose"); // MongoDB 연결
 
+const {initGetPolicy} = require("lib/policyData");
 const app = new Koa(); // Application instance
 const router = new Router(); // router instance
 const bodyPaser = require("koa-bodyparser"); // response body json return
 
 const api = require("./api"); // rest api 가져오기
-const { jwtMiddleware } = require("lib/token"); // t
+const { jwtMiddleware } = require("lib/token");
 
 mongoose.Promise = global.Promise; // use ES6 Native Promise
 
@@ -21,6 +22,8 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
         console.error(e);
     });
 // db 연결
+
+initGetPolicy(); // 공공데이터 불러오기
 
 const port = process.env.PORT || 4000;
 

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Ionicon from "react-ionicons";
+import { Link } from "react-router-dom";
+
 import CardList from "../CardList";
 import Filter from "../Filter";
 
@@ -7,7 +9,13 @@ import "./styles.scss";
 
 export default class presenter extends Component {
   render() {
-    const { isMenuOpen, menuOpen, menuClose } = this.props;
+    const {
+      match,
+      isMenuOpen,
+      menuOpen,
+      menuClose,
+      switchCategory
+    } = this.props;
 
     return (
       <>
@@ -17,11 +25,15 @@ export default class presenter extends Component {
               icon="ios-menu"
               onClick={isMenuOpen ? menuClose : menuOpen}
             />
-            <span>청춘어람</span>
+            <Link to="/">
+              <span>청춘어람</span>
+            </Link>
           </div>
         </div>
         <section className="main">
-          <h1 className="main__title">전체 정책</h1>
+          <h1 className="main__title">
+            {switchCategory(match.params.category)}
+          </h1>
           <Filter />
           <div className="main__divider" />
           <CardList />
