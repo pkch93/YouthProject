@@ -57,4 +57,14 @@ Account.methods.generateToken = function(){
     return generateToken(payload);
 };
 
+Account.statics.reviewCreate = function({title, comment}){
+    this.reviews.push({
+        title,
+        comment
+    });
+    this.save(err => {
+        if(err) return console.log(err);
+    });
+}; // 리뷰 작성
+
 module.exports = mongoose.model("Account", Account);

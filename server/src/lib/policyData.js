@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const fs = require("fs");
 
-const Policy = require("models/data/policy");
-const Events = require("models/data/event");
-const Intern = require("models/data/intern");
-const Govern =  require("models/data/govern");
+const PolicySchema = require("models/data/policy");
+const Policy = mongoose.model("Policy", PolicySchema);
+const EventsSchema = require("models/data/event");
+const Events = mongoose.model("Events", EventsSchema);
+const InternSchema = require("models/data/intern");
+const Intern = mongoose.model("Intern", InternSchema);
+const GovernSchema = require("models/data/govern");
+const Govern = mongoose.model("Govern", GovernSchema);
+
 
 const policyURL = 'policyData/policy.json';
 const eventURL = 'policyData/empEvent.json';

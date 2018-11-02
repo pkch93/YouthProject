@@ -24,4 +24,4 @@ Policy.statics.getPolicy = function(id) {
     return this.find({"busiId": id});
 };
 
-module.exports = mongoose.model("Policy", Policy);
+module.exports = Policy;

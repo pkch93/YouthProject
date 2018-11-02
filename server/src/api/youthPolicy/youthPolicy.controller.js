@@ -1,28 +1,32 @@
-const Policy = require("models/data/policy");
-const Events = require("models/data/event");
-const Intern = require("models/data/intern");
-const Govern = require("models/data/govern");
+const mongoose = require("mongoose");
+const PolicySchema = require("models/data/policy");
+const Policy = mongoose.model("Policy", PolicySchema);
+const EventsSchema = require("models/data/event");
+const Events = mongoose.model("Events", EventsSchema);
+const InternSchema = require("models/data/intern");
+const Intern = mongoose.model("Intern", InternSchema);
+const GovernSchema = require("models/data/govern");
+const Govern = mongoose.model("Govern", GovernSchema);
 
 exports.getPolicies = async ctx => {
-    const policies, events, interns, governs;
     const {category} = ctx.request.body;
     if(category === "policy"){
-        policies = Policy.find();
+        const policies = Policy.find();
         ctx.body = policies;
     } else if (category === "event") {
-        events = Events.find();
+        const events = Events.find();
         ctx.body = events;
     } else if (category === "govern"){
-        governs = Govern.find();
+        const governs = Govern.find();
         ctx.body = governs;
     } else if (category === "intern"){
-        interns = Intern.find();
+        const interns = Intern.find();
         ctx.body = interns;
     } else {
-        policies = Policy.find();
-        events = Events.find();
-        interns = Intern.find();
-        governs = Govern.find();
+        const policies = Policy.find();
+        const events = Events.find();
+        const interns = Intern.find();
+        const governs = Govern.find();
         ctx.body = {policies, events, interns, governs};
     }
 };

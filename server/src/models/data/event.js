@@ -13,4 +13,4 @@ const Events = new Schema({
     likes: {type: Number, default: 0}
 });
 
-module.exports = mongoose.model("Events", Events);
+module.exports = Events;

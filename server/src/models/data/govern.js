@@ -20,4 +20,4 @@ const Govern = new Schema({
     likes: {type: Number, default: 0}
 });
 
-module.exports = mongoose.model("Govern", Govern);
+module.exports = Govern;
