@@ -101,7 +101,7 @@ export default class presenter extends Component {
             <Ionicon icon="ios-close" onClick={menuClose} />
           </div>
           <ul className="menu__items">
-            <Link to="/policy">
+            <Link to="/policy" onClick={() => menuClose()}>
               <li
                 className={
                   match.params.category === "policy"
@@ -119,7 +119,7 @@ export default class presenter extends Component {
                 />
               </li>
             </Link>
-            <Link to="/intern">
+            <Link to="/intern" onClick={() => menuClose()}>
               <li
                 className={
                   match.params.category === "intern"
@@ -137,7 +137,7 @@ export default class presenter extends Component {
                 />
               </li>
             </Link>
-            <Link to="/event">
+            <Link to="/event" onClick={() => menuClose()}>
               <li
                 className={
                   match.params.category === "event"
@@ -155,7 +155,7 @@ export default class presenter extends Component {
                 />
               </li>
             </Link>
-            <Link to="/govern">
+            <Link to="/govern" onClick={() => menuClose()}>
               <li
                 className={
                   match.params.category === "govern"
