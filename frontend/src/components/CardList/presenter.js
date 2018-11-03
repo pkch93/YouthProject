@@ -34,14 +34,28 @@ export default class presenter extends Component {
   };
 
   render() {
-    const { match } = this.props;
+    const { match, searchKeyword } = this.props;
 
     return (
       <section className="card-list">
         {console.log(Object.values(this.switchCards(match.params.category)))}
-        {Object.values(this.switchCards(match.params.category)).map(data => {
-          return <Card key={data._id} data={data} match={match} />;
-        })}
+        {Object.values(this.switchCards(match.params.category))
+          .filter(data => {
+            return (
+              (data.type === "policy"
+                ? data.busiNm.indexOf(searchKeyword)
+                : data.type === "intern"
+                  ? data.collectJobsNm.indexOf(searchKeyword)
+                  : data.type === "event"
+                    ? data.eventNm.indexOf(searchKeyword)
+                    : data.type === "govern"
+                      ? data.bsnsNm.indexOf(searchKeyword)
+                      : "") > -1
+            );
+          })
+          .map(data => {
+            return <Card key={data._id} data={data} match={match} />;
+          })}
       </section>
     );
   }

@@ -12,12 +12,14 @@ export default class presenter extends Component {
     const {
       data,
       isLoaded,
+      searchKeyword,
 
       match,
       isMenuOpen,
       menuOpen,
       menuClose,
-      switchCategory
+      switchCategory,
+      handleChange
     } = this.props;
 
     return (
@@ -37,10 +39,10 @@ export default class presenter extends Component {
           <h1 className="main__title">
             {switchCategory(match.params.category)}
           </h1>
-          <Filter />
+          <Filter searchKeyword={searchKeyword} handleChange={handleChange} />
           <div className="main__divider" />
           {isLoaded ? (
-            <CardList data={data} match={match} />
+            <CardList data={data} match={match} searchKeyword={searchKeyword} />
           ) : (
             <img
               className="main__loading"

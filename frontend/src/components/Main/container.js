@@ -4,7 +4,8 @@ import App from "./presenter";
 export default class container extends Component {
   state = {
     data: {},
-    isLoaded: false
+    isLoaded: false,
+    searchKeyword: ""
   };
 
   // 데이터를 모두 불러온다.
@@ -35,12 +36,19 @@ export default class container extends Component {
     }
   };
 
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
   render() {
     return (
       <App
         {...this.state}
         {...this.props}
         switchCategory={this.switchCategory}
+        handleChange={this.handleChange}
       />
     );
   }

@@ -5,6 +5,8 @@ import "./styles.scss";
 
 export default class presenter extends Component {
   render() {
+    const { searchKeyword, handleChange } = this.props;
+
     return (
       <>
         <div className="filter__wrapper">
@@ -17,8 +19,10 @@ export default class presenter extends Component {
         <div className="filter__search">
           <input
             type="text"
-            name=""
+            name="searchKeyword"
+            value={searchKeyword}
             placeholder="검색할 사업명을 입력하세요."
+            onChange={handleChange}
           />
           <Ionicon icon="ios-search" />
         </div>
