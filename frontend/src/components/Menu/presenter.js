@@ -91,6 +91,24 @@ export default class presenter extends Component {
                 />
               </li>
             </Link>
+            <Link to="/login">
+              <li
+                className={
+                  match.params.category === "login"
+                    ? "menu__item menu__item--active menu__item--login"
+                    : "menu__item menu__item--login"
+                }
+              >
+                로그인
+                <Ionicon
+                  icon={
+                    match.params.category === "login"
+                      ? "ios-contacts"
+                      : "ios-contacts-outline"
+                  }
+                />
+              </li>
+            </Link>
           </ul>
         </section>
 
@@ -169,6 +187,24 @@ export default class presenter extends Component {
                 <Ionicon
                   icon={
                     match.params.category === "govern"
+                      ? "ios-contacts"
+                      : "ios-contacts-outline"
+                  }
+                />
+              </li>
+            </Link>
+            <Link to="/login">
+              <li
+                className={
+                  match.params.category === "login"
+                    ? "menu__item menu__item--active menu__item--login"
+                    : "menu__item menu__item--login"
+                }
+              >
+                로그인
+                <Ionicon
+                  icon={
+                    match.params.category === "login"
                       ? "ios-contacts"
                       : "ios-contacts-outline"
                   }

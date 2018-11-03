@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Menu from "../Menu";
 import Main from "../Main";
+import Auth from "../Auth";
 
 import "./styles.scss";
 
@@ -35,6 +36,17 @@ export default class presenter extends Component {
           />
         </Switch>
         <Switch>
+          <Route
+            path="/login"
+            render={({ match }) => (
+              <Auth
+                match={match}
+                isMenuOpen={isMenuOpen}
+                menuOpen={menuOpen}
+                menuClose={menuClose}
+              />
+            )}
+          />
           <Route
             path="/:category"
             render={({ match }) => (
