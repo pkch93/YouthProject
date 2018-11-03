@@ -25,9 +25,6 @@ export default class presenter extends Component {
         };
       default:
         return {
-          ...this.props.data.events,
-          ...this.props.data.governs,
-          ...this.props.data.interns,
           ...this.props.data.policies
         };
     }
@@ -38,7 +35,6 @@ export default class presenter extends Component {
 
     return (
       <section className="card-list">
-        {console.log(Object.values(this.switchCards(match.params.category)))}
         {Object.values(this.switchCards(match.params.category))
           .filter(data => {
             return (

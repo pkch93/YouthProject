@@ -20,7 +20,8 @@ export default class presenter extends Component {
             <Link to="/policy">
               <li
                 className={
-                  match.params.category === "policy"
+                  match.params.category === "policy" ||
+                  match.params.category === undefined
                     ? "menu__item menu__item--active"
                     : "menu__item"
                 }
@@ -28,7 +29,8 @@ export default class presenter extends Component {
                 청년취업정책
                 <Ionicon
                   icon={
-                    match.params.category === "policy"
+                    match.params.category === "policy" ||
+                    match.params.category === undefined
                       ? "ios-checkbox"
                       : "ios-checkbox-outline"
                   }

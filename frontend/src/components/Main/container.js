@@ -32,7 +32,7 @@ export default class container extends Component {
       case "govern":
         return "정부지원일자리";
       default:
-        return "전체";
+        return "청년취업정책";
     }
   };
 
