@@ -1,15 +1,10 @@
 const mongoose = require("mongoose");
 
-const AccountSchema = require("models/account");
-const Account = mongoose.model("Account", AccountSchema);
-const PolicySchema = require("models/data/policy");
-const Policy = mongoose.model("Policy", PolicySchema);
-const EventsSchema = require("models/data/event");
-const Events = mongoose.model("Events", EventsSchema);
-const InternSchema = require("models/data/intern");
-const Intern = mongoose.model("Intern", InternSchema);
-const GovernSchema = require("models/data/govern");
-const Govern = mongoose.model("Govern", GovernSchema);
+const {AccountSchema, Account} = require("models/account");
+const {PolicySchema, Policy} = require("models/data/policy");
+const {EventsSchema, Events} = require("models/data/event");
+const {InternSchema, Intern} = require("models/data/intern");
+const {GovernSchema, Govern} = require("models/data/govern");
 
 exports.getPolicies = async ctx => {
     const {category} = ctx.params;
@@ -36,7 +31,7 @@ exports.getPolicies = async ctx => {
 };
 
 exports.like = async ctx => {
-    const account = await Account.findById(ctx.request.user.decoded._id);
+    const account = await Account.findById(ctx.request.user._id);
 
     const {id, category} = ctx.params;
     account.likeData(id, category);
@@ -62,13 +57,13 @@ exports.getReviews = async ctx => {
 };
 
 exports.storeData = async ctx => {
-    const account = await Account.findbyId(ctx.request.user.decoded._id);
+    const account = await Account.findbyId(ctx.request.user._id);
     const {id, category} = ctx.params;
     account.storeData(id, category);
 };
 
 exports.writeReview = async ctx => {
-    const account = await Account.findbyId(ctx.request.user.decoded._id);
+    const account = await Account.findbyId(ctx.request.user._id);
     const {id, category} = ctx.params;
     const {title, content} = ctx.request.body;
     const review = new Review({

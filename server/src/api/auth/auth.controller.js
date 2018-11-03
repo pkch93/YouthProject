@@ -1,7 +1,6 @@
 const Joi = require("joi"); // request 변수들을 검증하기 위한 api
 const mongoose = require("mongoose");
-const AccountSchema = require("models/account"); // Account Collection
-const Account = mongoose.model("Account", AccountSchema);
+const {AccountSchema, Account}= require("models/account"); // Account Collection
 // const ReviewSchema = require("models/review");
 // const Review = mongoose.model("Review", ReviewSchema);
 

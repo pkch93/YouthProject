@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
-const Review = require("models/review");
+const {AccountSchema} = require("models/account");
+const {ReviewSchema} = require("models/review");
 
 const Govern = new Schema({
     rn: String,
@@ -16,20 +17,16 @@ const Govern = new Schema({
     registDt: String,
     rcritBeginDe: String,
     rcritEndDe: String,
-    reviews: [Review],
+    reviews: [ReviewSchema],
     likes: {type: Number, default: 0},
     type: {type: String, default: "govern"}
 });
 
-Govern.methods.likeUp = function(account){
-    this.likes.push(account);
+Govern.methods.likeUp = function(id){
+    this.likes.update({"_id": id}, {"$inc": {likes: 1}});
     this.save(err => {
         if(err) return console.log(err);
     })
-};
-
-Govern.statics.likeCount = function(id){
-    return this.findById(id).likes.count();
 };
 
 Govern.methods.reviewCreate = function(review){
@@ -39,4 +36,5 @@ Govern.methods.reviewCreate = function(review){
     });
 };
 
-module.exports = Govern;
+module.exports.GovernSchema = Govern;
+module.exports.Govern = mongoose.model("Govern", Govern);
