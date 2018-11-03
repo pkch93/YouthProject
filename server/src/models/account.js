@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 const crypto = require("crypto");
 const { generateToken } = require("lib/token");
-const PolicySchema = require("./data/policy");
-const EventsSchema = require("./data/event");
-const InternSchema = require("./data/intern");
-const GovernSchema = require("./data/govern");
-const Review = require("./review")
+const {PolicySchema, Policy} = require("./data/policy");
+const {EventsSchema, Events} = require("./data/event");
+const {InternSchema, Intern} = require("./data/intern");
+const {GovernSchema, Govern} = require("./data/govern");
+
+const {ReviewSchema} = require("./review")
 
 function hash(password){
     return crypto.createHmac("sha256", process.env.SECRET_KEY).update(password).digest("hex");
@@ -19,7 +20,7 @@ const Account = new Schema({
     createdAt: {type: Date, default: Date.now},
     store: [PolicySchema | EventsSchema | InternSchema | GovernSchema],
     like: [PolicySchema | EventsSchema | InternSchema | GovernSchema],
-    reviews: [Review]
+    reviews: [ReviewSchema]
 });
 
 Account.statics.findByUsername = function(username){
@@ -67,46 +68,38 @@ Account.methods.reviewCreate = function(review){
 
 Account.methods.storeData = async function(id, category){
     if(category === "policy"){
-        const Policy = mongoose.model("Policy", PolicySchema);
         const policy = await Policy.findById(id).exec();
         this.store.push(policy);
     } else if (category === "event"){
-        const Events = mongoose.model("Event", EventsSchema);
         const event = await Events.findById(id).exec();
         this.store.push(event);
     } else if (category === "govern"){
-        const Govern = mongoose.model("Govern", GovernSchema);
         const govern = await Govern.findById(id).exec();
         this.store.push(govern);
     } else if (category === "intern"){
-        const Intern = mongoose.model("Intern", InternSchema);
         const intern = await Intern.findById(id).exec();
         this.store.push(intern);
     }
 };
-
 Account.methods.likeData = async function(id, category){
     if(category === "policy"){
-        const Policy = mongoose.model("Policy", PolicySchema);
         const policy = await Policy.findById(id).exec();
         policy.likeUp(this);
         this.like.push(policy);
     } else if (category === "event"){
-        const Events = mongoose.model("Event", EventsSchema);
         const event = await Events.findById(id).exec();
         event.likeUp(this);
         this.like.push(event);
     } else if (category === "govern"){
-        const Govern = mongoose.model("Govern", GovernSchema);
         const govern = await Govern.findById(id).exec();
         govern.likeUp(this);
         this.like.push(govern);
     } else if (category === "intern"){
-        const Intern = mongoose.model("Intern", InternSchema);
         const intern = await Intern.findById(id).exec();
         intern.likeUp(this);
         this.like.push(intern);
     }
 };
 
-module.exports = Account;
+module.exports.AccountSchema = Account;
+module.exports.Account = mongoose.model("Account", Account);

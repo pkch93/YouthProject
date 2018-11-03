@@ -6,4 +6,5 @@ const Review = new Schema({
     content: String,
 });
 
-module.exports = Review;
+module.exports.ReviewSchema = Review;
+module.exports.Review = mongoose.model("Review", Review);

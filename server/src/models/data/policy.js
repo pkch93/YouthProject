@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
-const AccountSchema = require("models/account");
-const Review = require("models/review");
+const {AccountSchema} = require("models/account");
+const {ReviewSchema} = require("models/review");
 
 const Policy = new Schema({
     busiId: String,
@@ -17,8 +17,8 @@ const Policy = new Schema({
     empEtcCont: String,
     relInfoUrl: String,
     chargerClcd: String,
-    reviews: [Review],
-    likes: [AccountSchema],
+    reviews: [ReviewSchema],
+    likes: {type: Number, default: 0},
     type: {type: String, default: "policy"}
 });
 
@@ -26,12 +26,8 @@ Policy.statics.getPolicy = function(id) {
     return this.find({"busiId": id});
 };
 
-Policy.statics.likeCount = function(id){
-    return this.findById(id).likes.count();
-};
-
-Policy.methods.likeUp = function(account){
-    this.likes.push(account);
+Policy.methods.likeUp = function(id){
+    this.likes.update({"_id": id}, {"$inc": {likes: 1}});
     this.save(err => {
         if(err) return console.log(err);
     });
@@ -44,4 +40,5 @@ Policy.methods.reviewCreate = function(review){
     });
 };
 
-module.exports = Policy;
+module.exports.PolicySchema = Policy;
+module.exports.Policy = mongoose.model("Policy", Policy);

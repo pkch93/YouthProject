@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
-const AccountSchema = require("models/account");
-const Review = require("models/review");
+const {AccountSchema} = require("models/account");
+const {ReviewSchema} = require("models/review");
 
 const Intern = new Schema({
     wantedAuthNo: String,
@@ -14,22 +14,17 @@ const Intern = new Schema({
     selPsncnt: String,
     applyDt: String,
     detailUrl: String,
-    reviews: [Review],
-    likes: [AccountSchema],
+    reviews: [ReviewSchema],
+    likes: {type: Number, default: 0},
     type: {type: String, default: "intern"}
 });
 
-Intern.methods.likeUp = function(account){
-    this.likes.push(account);
+Intern.methods.likeUp = function(id){
+    this.likes.update({"_id": id}, {"$inc": {likes: 1}});
     this.save(err => {
         if(err) return console.log(err);
     })
 };
-
-Intern.statics.likeCount = function(id){
-    return this.findById(id).likes.count();
-};
-
 
 Intern.methods.reviewCreate = function(review){
     this.reviews.push(review);
@@ -38,4 +33,5 @@ Intern.methods.reviewCreate = function(review){
     });
 };
 
-module.exports = Intern;
+module.exports.InternSchema = Intern;
+module.exports.Intern = mongoose.model("Intern", Intern);

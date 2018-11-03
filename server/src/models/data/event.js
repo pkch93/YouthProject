@@ -1,28 +1,26 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
-const Review = require("models/review");
+const {AccountSchema} = require("models/account");
+const {ReviewSchema} = require("models/review");
 
-const Events = new Schema({
+const Events = new Schema();
+Events.add({
     areaCd: String,
     area: String,
     eventNo: String,
     eventNm: String,
     eventTerm: String,
     startDt: String,
-    reviews: [Review],
+    reviews: [ReviewSchema],
     likes: {type: Number, default: 0},
     type: {type: String, default: "event"}
 });
 
-Events.methods.likeUp = function(account){
-    this.likes.push(account);
+Events.methods.likeUp = function(id){
+    this.likes.update({"_id": id}, {"$inc": {likes: 1}});
     this.save(err => {
         if(err) return console.log(err);
     })
-};
-
-Events.statics.likeCount = function(id){
-    return this.findById(id).likes.count();
 };
 
 Events.methods.reviewCreate = function(review){
@@ -32,4 +30,5 @@ Events.methods.reviewCreate = function(review){
     });
 };
 
-module.exports = Events;
+module.exports.EventsSchema = Events;
+module.exports.Events = mongoose.model("Event", Events);
