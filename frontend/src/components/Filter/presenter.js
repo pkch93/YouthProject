@@ -14,6 +14,9 @@ export default class presenter extends Component {
             <li className="filter__item filter__item--active">#전체</li>
             <li className="filter__item">#인기순</li>
             <li className="filter__item">#온라인 신청</li>
+            <li className="filter__item">#학력 무관</li>
+            <li className="filter__item">#연령 무관</li>
+            <li className="filter__item">#정부 사업</li>
           </ul>
         </div>
         <div className="filter__search">

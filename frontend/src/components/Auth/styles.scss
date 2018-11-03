@@ -26,7 +26,10 @@
         border-radius: 3px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         background-color: rgba(0, 0, 0, 0.05);
-        font-size: 14px;
+        font-size: 15px;
+        &:focus {
+          outline: none;
+        }
       }
       .form__submit {
         display: flex;
@@ -37,8 +40,8 @@
         border: 1px solid #acacac;
         border-radius: 4px;
         color: black;
-        font-size: 14px;
-        height: 30px;
+        font-size: 15px;
+        height: 35px;
         cursor: pointer;
         margin-top: 15px;
       }
@@ -89,7 +92,10 @@
         border-radius: 3px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         background-color: rgba(0, 0, 0, 0.05);
-        font-size: 14px;
+        font-size: 15px;
+        &:focus {
+          outline: none;
+        }
       }
       .form__submit {
         display: flex;
@@ -100,8 +106,8 @@
         border: 1px solid #acacac;
         border-radius: 4px;
         color: black;
-        font-size: 14px;
-        height: 30px;
+        font-size: 15px;
+        height: 35px;
         cursor: pointer;
         margin-top: 15px;
       }

@@ -103,8 +103,8 @@ export default class presenter extends Component {
                 <Ionicon
                   icon={
                     match.params.category === "login"
-                      ? "ios-contacts"
-                      : "ios-contacts-outline"
+                      ? "ios-contact"
+                      : "ios-contact-outline"
                   }
                 />
               </li>
@@ -205,8 +205,8 @@ export default class presenter extends Component {
                 <Ionicon
                   icon={
                     match.params.category === "login"
-                      ? "ios-contacts"
-                      : "ios-contacts-outline"
+                      ? "ios-contact"
+                      : "ios-contact-outline"
                   }
                 />
               </li>
