@@ -2,8 +2,8 @@ const Joi = require("joi"); // request 변수들을 검증하기 위한 api
 const mongoose = require("mongoose");
 const AccountSchema = require("models/account"); // Account Collection
 const Account = mongoose.model("Account", AccountSchema);
-const ReviewSchema = require("models/review");
-const Review = mongoose.model("Review", ReviewSchema);
+// const ReviewSchema = require("models/review");
+// const Review = mongoose.model("Review", ReviewSchema);
 
 exports.localRegister = async ctx => {
     const schema = Joi.object().keys({
@@ -123,33 +123,5 @@ exports.check = ctx => {
         ctx.status = 403;
         return ;
     }
-    ctx.body = user.profile;
-};
-
-exports.writeReview = async ctx => {
-    const account = await Account.findbyId(ctx.request.user._id);
-    const {_id, category, title, content} = ctx.request.body;
-    const review = new Review({
-        title,
-        content
-    });
-    
-    account.reviewCreate(review);
-    if(category === "policy"){
-        const Policy = mongoose.model("Policy", PolicySchema);
-        const policy = Policy.findById(_id);
-        policy.reviewCreate(review);
-    } else if (category === "event"){
-        const Events = mongoose.model("Event", EventsSchema);
-        const event = Events.findById(_id);
-        event.reviewCreate(review);
-    } else if (category === "govern"){
-        const Govern = mongoose.model("Govern", GovernSchema);
-        const govern = Events.findById(_id);
-        govern.reviewCreate(review);
-    } else if (category === "intern"){
-        const Intern = mongoose.model("Intern", InternSchema);
-        const intern = Intern.findById(_id);
-        intern.reviewCreate(review);
-    }
+    ctx.body = user.username;
 };

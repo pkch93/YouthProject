@@ -18,6 +18,7 @@ const Account = new Schema({
     password: String,
     createdAt: {type: Date, default: Date.now},
     store: [PolicySchema | EventsSchema | InternSchema | GovernSchema],
+    like: [PolicySchema | EventsSchema | InternSchema | GovernSchema],
     reviews: [Review]
 });
 
@@ -62,29 +63,49 @@ Account.methods.reviewCreate = function(review){
     this.save(err => {
         if(err) return console.log(err);
     });
-}; // 리뷰 작성
+};
 
-Account.methods.likeData = function(id, category){
+Account.methods.storeData = async function(id, category){
     if(category === "policy"){
         const Policy = mongoose.model("Policy", PolicySchema);
-        const policy = Policy.findById(id);
-        policy.likeUp(this);
+        const policy = await Policy.findById(id).exec();
         this.store.push(policy);
     } else if (category === "event"){
         const Events = mongoose.model("Event", EventsSchema);
-        const event = Events.findById(id);
-        event.likeUp(this);
+        const event = await Events.findById(id).exec();
         this.store.push(event);
     } else if (category === "govern"){
         const Govern = mongoose.model("Govern", GovernSchema);
-        const govern = Events.findById(id);
-        govern.likeUp(this);
+        const govern = await Govern.findById(id).exec();
         this.store.push(govern);
     } else if (category === "intern"){
         const Intern = mongoose.model("Intern", InternSchema);
-        const intern = Intern.findById(id);
-        intern.likeUp(this);
+        const intern = await Intern.findById(id).exec();
         this.store.push(intern);
+    }
+};
+
+Account.methods.likeData = async function(id, category){
+    if(category === "policy"){
+        const Policy = mongoose.model("Policy", PolicySchema);
+        const policy = await Policy.findById(id).exec();
+        policy.likeUp(this);
+        this.like.push(policy);
+    } else if (category === "event"){
+        const Events = mongoose.model("Event", EventsSchema);
+        const event = await Events.findById(id).exec();
+        event.likeUp(this);
+        this.like.push(event);
+    } else if (category === "govern"){
+        const Govern = mongoose.model("Govern", GovernSchema);
+        const govern = await Govern.findById(id).exec();
+        govern.likeUp(this);
+        this.like.push(govern);
+    } else if (category === "intern"){
+        const Intern = mongoose.model("Intern", InternSchema);
+        const intern = await Intern.findById(id).exec();
+        intern.likeUp(this);
+        this.like.push(intern);
     }
 };
 

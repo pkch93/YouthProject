@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const AccountSchema = require("models/account");
+const Account = mongoose.model("Account", AccountSchema);
 const PolicySchema = require("models/data/policy");
 const Policy = mongoose.model("Policy", PolicySchema);
 const EventsSchema = require("models/data/event");
@@ -31,4 +33,65 @@ exports.getPolicies = async ctx => {
         ctx.body = {policies, events, interns, governs};
     }
     ctx.res.writeHead(200, {'Access-Control-Allow-Origin': '*'});
+};
+
+exports.like = async ctx => {
+    const account = await Account.findById(ctx.request.user.decoded._id);
+
+    const {id, category} = ctx.params;
+    account.likeData(id, category);
+};
+
+exports.getReviews = async ctx => {
+    const {id, category} = ctx.params;
+    let reviews = "";
+    if(category === "policy"){
+        const Policy = mongoose.model("Policy", PolicySchema);
+        reviews = Policy.findById(id).populate("reviews").exec();
+    } else if (category === "event"){
+        const Events = mongoose.model("Event", EventsSchema);
+        reviews = Events.findById(id).populate("reviews").exec();
+    } else if (category === "govern"){
+        const Govern = mongoose.model("Govern", GovernSchema);
+        reviews = Govern.findById(id).populate("reviews").exec();
+    } else if (category === "intern"){
+        const Intern = mongoose.model("Intern", InternSchema);
+        reviews = Intern.findById(id).populate("reviews").exec();
+    }
+    ctx.body = reviews;
+};
+
+exports.storeData = async ctx => {
+    const account = await Account.findbyId(ctx.request.user.decoded._id);
+    const {id, category} = ctx.params;
+    account.storeData(id, category);
+};
+
+exports.writeReview = async ctx => {
+    const account = await Account.findbyId(ctx.request.user.decoded._id);
+    const {id, category} = ctx.params;
+    const {title, content} = ctx.request.body;
+    const review = new Review({
+        title,
+        content
+    });
+    
+    account.reviewCreate(review);
+    if(category === "policy"){
+        const Policy = mongoose.model("Policy", PolicySchema);
+        const policy = Policy.findById(id);
+        policy.reviewCreate(review);
+    } else if (category === "event"){
+        const Events = mongoose.model("Event", EventsSchema);
+        const event = Events.findById(id);
+        event.reviewCreate(review);
+    } else if (category === "govern"){
+        const Govern = mongoose.model("Govern", GovernSchema);
+        const govern = Govern.findById(id);
+        govern.reviewCreate(review);
+    } else if (category === "intern"){
+        const Intern = mongoose.model("Intern", InternSchema);
+        const intern = Intern.findById(id);
+        intern.reviewCreate(review);
+    }
 };
