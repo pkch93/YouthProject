@@ -14,10 +14,22 @@ const Events = new Schema({
     type: {type: String, default: "event"}
 });
 
-Events.methods.likeUp = function(id, category){
-    if(category === "event"){
-        this.update({"_id": id}, {"$inc": {likes: 1}});
-    }
+Events.methods.likeUp = function(account){
+    this.likes.push(account);
+    this.save(err => {
+        if(err) return console.log(err);
+    })
+};
+
+Events.statics.likeCount = function(id){
+    return this.findById(id).likes.count();
+};
+
+Events.methods.reviewCreate = function(review){
+    this.reviews.push(review);
+    this.save(err => {
+        if(err) return console.log(err);
+    });
 };
 
 module.exports = Events;

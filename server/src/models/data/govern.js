@@ -21,4 +21,22 @@ const Govern = new Schema({
     type: {type: String, default: "govern"}
 });
 
+Govern.methods.likeUp = function(account){
+    this.likes.push(account);
+    this.save(err => {
+        if(err) return console.log(err);
+    })
+};
+
+Govern.statics.likeCount = function(id){
+    return this.findById(id).likes.count();
+};
+
+Govern.methods.reviewCreate = function(review){
+    this.reviews.push(review);
+    this.save(err => {
+        if(err) return console.log(err);
+    });
+};
+
 module.exports = Govern;

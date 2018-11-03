@@ -18,7 +18,7 @@ const Account = new Schema({
     password: String,
     createdAt: {type: Date, default: Date.now},
     store: [PolicySchema | EventsSchema | InternSchema | GovernSchema],
-    reviews: [Review] 
+    reviews: [Review]
 });
 
 Account.statics.findByUsername = function(username){
@@ -57,15 +57,35 @@ Account.methods.generateToken = function(){
     return generateToken(payload);
 };
 
-Account.methods.reviewCreate = function({title, comment}){
-    const Review = mongoose.model("Review", ReviewSchema);
-    this.reviews.push(new Review({
-        title,
-        comment
-    }));
+Account.methods.reviewCreate = function(review){
+    this.reviews.push(review);
     this.save(err => {
         if(err) return console.log(err);
     });
 }; // 리뷰 작성
 
-module.exports = mongoose.model("Account", Account);
+Account.methods.likeData = function(id, category){
+    if(category === "policy"){
+        const Policy = mongoose.model("Policy", PolicySchema);
+        const policy = Policy.findById(id);
+        policy.likeUp(this);
+        this.store.push(policy);
+    } else if (category === "event"){
+        const Events = mongoose.model("Event", EventsSchema);
+        const event = Events.findById(id);
+        event.likeUp(this);
+        this.store.push(event);
+    } else if (category === "govern"){
+        const Govern = mongoose.model("Govern", GovernSchema);
+        const govern = Events.findById(id);
+        govern.likeUp(this);
+        this.store.push(govern);
+    } else if (category === "intern"){
+        const Intern = mongoose.model("Intern", InternSchema);
+        const intern = Intern.findById(id);
+        intern.likeUp(this);
+        this.store.push(intern);
+    }
+};
+
+module.exports = Account;
