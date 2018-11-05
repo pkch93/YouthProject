@@ -6,6 +6,7 @@ import "./styles.scss";
 
 export default class presenter extends Component {
   switchCategory = category => {
+    // 각 테이블마다 column 이름이 다 달라서 하나하나마다 조건문으로
     switch (category) {
       case "policy":
         return "청년취업정책";

@@ -4,39 +4,15 @@ import Card from "../Card";
 import "./styles.scss";
 
 export default class presenter extends Component {
-  // data에 담긴 카테고리 분류
-  switchCards = category => {
-    switch (category) {
-      case "policy":
-        return {
-          ...this.props.data.policies
-        };
-      case "intern":
-        return {
-          ...this.props.data.interns
-        };
-      case "event":
-        return {
-          ...this.props.data.events
-        };
-      case "govern":
-        return {
-          ...this.props.data.governs
-        };
-      default:
-        return {
-          ...this.props.data.policies
-        };
-    }
-  };
-
   render() {
-    const { match, searchKeyword } = this.props;
+    const { match, searchKeyword, switchCards } = this.props;
 
     return (
       <section className="card-list">
-        {Object.values(this.switchCards(match.params.category))
+        {Object.values(switchCards(match.params.category))
           .filter(data => {
+            // 검색할 때 어떤 DB column을 기준으로 할 것인지
+            // 각 테이블마다 제목을 뜻하는 column의 이름이 달라 발생하는 문제
             return (
               (data.type === "policy"
                 ? data.busiNm.indexOf(searchKeyword)
