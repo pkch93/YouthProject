@@ -17,9 +17,6 @@ const Govern = new Schema({
     registDt: String,
     rcritBeginDe: String,
     rcritEndDe: String,
-    reviews: [ReviewSchema],
-    likes: {type: Number, default: 0},
-    type: {type: String, default: "govern"}
 });
 
 Govern.methods.likeUp = function(id){
