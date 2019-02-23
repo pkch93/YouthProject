@@ -35,6 +35,23 @@ exports.createFeedback = (req, res) => {
     });
 };
 
+exports.updateFeedback = async (req, res) => {
+    const { feedbackId } = req.params;
+    if (feedbackId !== req.uesr._id) {
+        res.status(403).json({
+            message: 'you don\'t have permission to access this data'
+        });
+    }
+    const feedback = await Feedback.findOne({_id: feedbackId});
+    const { title, content } = req.body;
+    feedback.title = title;
+    feedback.content = content;
+    feedback.save();
+    res.status(200).json({
+        feedback
+    });
+};
+
 exports.deleteFeedback = async (req, res) => {
     const { feedbackId } = req.params;
     const feedback = await Feedback.findOne({_id: feedbackId});
