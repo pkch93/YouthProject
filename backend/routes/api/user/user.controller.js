@@ -1,4 +1,6 @@
 const User = require('../../../model/user');
+const MyPolicy = require('../../../model/my_policy');
+
 
 exports.getUser = async (req, res) => {
     if (!req.user) 
@@ -64,4 +66,17 @@ exports.exitUser = async (req, res) => {
         });
     }
 };
-// 수정, 삭제
+
+exports.myPolicy = async (req, res) => {
+    const userId = req.user._id;
+    try {
+        const myPolicy = await MyPolicy.find({user: userId});
+        res.status(200).json({
+            myPolicy
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: 'internal error'
+        });
+    }
+};  

@@ -23,7 +23,9 @@ module.exports = async () => {
 
     require('./user');
     require('./feedback');
+    require('./my_policy');
     const Policy = require('./policy');
+    
     const test = await Policy.find().exists('_id');
     if (test.length == 0){
         const apiKey = `${process.env.API_KEY}`;
