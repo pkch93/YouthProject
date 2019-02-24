@@ -5,7 +5,7 @@ const policyRouter = require('./policy');
 const feedbackRouter = require('./feedback');
 
 router.use('/user', userRouter);
-router.use('/policies', policyRouter);
-router.use('/policies/:policyId', feedbackRouter);
+router.use('/policies/', feedbackRouter);
+router.use('/policies/', policyRouter);
 
 module.exports = router;

@@ -61,8 +61,7 @@ const PolicySchema = new Schema({
         type: Number,
         required: true
     },
-    details: [EventSchema|GovernJobSchema|
-        YouthInternSchema|YouthPolicySchema]
+    details: EventSchema|GovernJobSchema|YouthInternSchema|YouthPolicySchema
 });
 
 module.exports = mongoose.model('policy', PolicySchema);

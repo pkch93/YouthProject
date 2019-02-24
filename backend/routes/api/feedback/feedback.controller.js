@@ -2,11 +2,18 @@ const Feedback = require('../../../model/feedback');
 
 exports.getFeedbacks = async (req, res) => {
     const { policyId } = req.params;
+    console.log(policyId);
     try {
         const feedbacks = await Feedback.find({policy: policyId});
-        res.status(200).json({
-            feedbacks
-        });
+        if (feedbacks.length !== 0){
+            res.status(200).json({
+                feedbacks
+            });
+        } else {
+            res.status(503).json({
+                message: 'this policy don\'t have feedback'
+            });
+        }
     } catch (err) {
         res.status(500).json({
             message: 'internal error'
@@ -26,7 +33,7 @@ exports.createFeedback = (req, res) => {
     feedback.save(err => {
         if (err){
             res.status(500).json({
-                massage: 'internal error'
+                message: 'internal error'
             });
         }
     });
